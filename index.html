@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kereta Manager Indonesia</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <header class="main-header">
+    <h1>Kereta Manager Indonesia</h1>
+    <div class="header-stats">
+      <span>Kas: <b id="money">Rp 0</b></span> | 
+      <span>Hari: <b id="day">1</b></span>
+      <span>Cuaca: <b id="current-weather">Cerah ☀️</b></span>
+      <span>Event: <b id="current-event">Hari Biasa</b></span>
+      <button id="next-day-btn" class="btn-secondary">⏭️ Hari Berikutnya</button>
+      <button id="save-btn" class="btn-secondary">💾 Simpan</button>
+      <button id="reset-btn" class="btn-danger">🔄 Reset</button>
+      <span id="save-status"></span>
+    </div>
+  </header>
+
+  <!-- Peta Visual Canvas -->
+  <section class="map-section">
+    <div class="map-card">
+      <div class="map-header">
+        <h3>🗺️ Peta Perjalanan Kereta</h3>
+        <div class="region-tabs">
+          <button class="btn-action active" id="tab-jawa" onclick="Game.switchRegion('JAWA')">🏝️ Pulau Jawa</button>
+          <button class="btn-action" id="tab-sumatra" onclick="Game.switchRegion('SUMATRA')">🌴 Pulau Sumatra</button>
+        </div>
+      </div>
+      <canvas id="mapCanvas" width="900" height="300"></canvas>
+    </div>
+  </section>
+
+  <section class="map-section finance-section">
+    <div class="map-card">
+      <h3>📊 Laporan & Analitik Keuangan (Per Hari)</h3>
+      <div class="finance-chart-wrapper">
+        <canvas id="financeChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section class="bank-section">
+    <div class="card">
+      <h3>🏦 Layanan Pinjaman Bank</h3>
+      <div class="bank-content">
+        <div>
+          <p>Hutang Bank Saat Ini: <strong id="bank-loan-amount">Rp 0</strong></p>
+          <p><small>*Bunga harian: <strong>5%</strong> dari total hutang.</small></p>
+        </div>
+        <div class="bank-actions">
+          <button class="btn-action" onclick="Game.takeLoan(100000000)">Pinjam Rp 100 Jt</button>
+          <button class="btn-action" onclick="Game.takeLoan(500000000)">Pinjam Rp 500 Jt</button>
+          <button class="btn-action btn-pay-loan" onclick="Game.payLoan()">Bayar Lunas</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="game-container">
+    <!-- Toko & Stok -->
+    <section class="panel">
+      <h2>Toko Armada & Gerbong</h2>
+      <div class="shop-buttons">
+        <button id="buy-cc201-btn" class="btn-primary">Beli CC201 (Rp 120 Jt)</button>
+        <button id="buy-cc206-btn" class="btn-primary">Beli CC206 (Rp 220 Jt)</button>
+        <button id="buy-k3-btn" class="btn-primary">Beli Gerbong Ekonomi (Rp 30 Jt)</button>
+        <button id="buy-k1-btn" class="btn-primary">Beli Gerbong Eksekutif (Rp 60 Jt)</button>
+      </div>
+
+      <div class="inventory-info" style="margin-top: 20px;">
+        <h3>Stok Gerbong Bebas</h3>
+        <p>Ekonomi: <b id="free-k3">0</b> | Eksekutif: <b id="free-k1">0</b></p>
+      </div>
+    </section>
+
+    <!-- Dipo Armada -->
+    <section class="panel">
+      <h2>Dipo Rangkaian</h2>
+      <div id="fleet-list"></div>
+    </section>
+
+    <!-- Kereta Berjalan -->
+    <section class="panel full-width">
+      <h2>Kereta Beroperasi</h2>
+      <div id="active-trips"></div>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
